@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAC.R STORE PERÚ | Catálogo</title>
+<style>
+:root{--ink:#20232a;--muted:#687080;--line:#e5e7eb;--soft:#f6f7f9;--accent:#20232a;--green:#168653;--yellow:#946200;--red:#e9564e}
+*{box-sizing:border-box}body{margin:0;background:#f7f8fa;color:var(--ink);font:15px/1.45 Arial,Helvetica,sans-serif}button,input,select{font:inherit}
+.container{max-width:1240px;margin:auto;padding:22px 18px 100px}
+header{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0 22px;border-bottom:1px solid var(--line)}
+.logo{font-size:23px;font-weight:900;letter-spacing:.3px}.logo small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.6px;font-weight:600;margin-top:4px}
+.btn{border:0;border-radius:9px;padding:11px 14px;font-weight:800;cursor:pointer}.btn-dark{background:#20232a;color:#fff}.btn-light{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.hero{padding:28px 0 24px}.hero h1{font-size:clamp(26px,4vw,38px);margin:0 0 8px;letter-spacing:-.8px}.hero p{margin:0;color:var(--muted)}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.toolbar input,.toolbar select{background:#fff;border:1px solid #dfe2e7;border-radius:9px;padding:11px 12px;min-width:160px;outline-color:#9298a3}.toolbar input{flex:1;min-width:190px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}.pill{background:#fff;border:1px solid var(--line);border-radius:30px;padding:9px 12px;color:#505766;cursor:pointer;font-size:13px}.pill.active{background:#20232a;color:#fff;border-color:#20232a}
+.headrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:25px 0 14px}.headrow h2{font-size:23px;margin:0}.count{font-size:11px;letter-spacing:1px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;display:flex;flex-direction:column;min-width:0;box-shadow:0 2px 7px #10182808}
+.photo{height:245px;background:#f0f1f3;display:flex;align-items:center;justify-content:center;position:relative;padding:12px;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:contain}
+.placeholder{color:#858b98;text-align:center;border:1px dashed #c8ccd4;border-radius:9px;width:100%;padding:20px 10px;font-size:12px}.placeholder b{display:block;color:#5a6170;font-size:15px;margin-bottom:5px}
+.tag{position:absolute;top:10px;left:10px;border-radius:5px;padding:5px 7px;font-size:10px;font-weight:900;letter-spacing:.35px;background:#e6f5ed;color:#147445}.tag.pre{background:#fff0c9;color:#805700}.tag.offer{left:auto;right:10px;background:#ffebe9;color:#bc322b}
+.cardbody{padding:14px;display:flex;flex-direction:column;flex:1}.line{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#687080;margin-bottom:6px}.name{font-size:16px;font-weight:800;margin-bottom:7px}.meta{font-size:12px;color:var(--muted);margin-bottom:5px}.price{font-size:20px;font-weight:900;margin:9px 0 12px}.price small{font-size:11px;font-weight:500;color:var(--muted)}
+.actions{display:flex;gap:7px;margin-top:auto}.add{flex:1;background:#20232a;color:#fff;border:0;border-radius:8px;padding:11px 8px;font-weight:800;font-size:12px;cursor:pointer}.wa{background:#eaf7ef;color:#168653;border:1px solid #d1eddb;border-radius:8px;padding:9px 11px;font-weight:900;cursor:pointer}
+.empty{display:none;padding:28px 0;color:var(--muted)}.help{font-size:12px;color:var(--muted);margin-top:28px}
+.cartfloat{display:none;position:fixed;z-index:5;bottom:17px;left:50%;transform:translateX(-50%);border:0;border-radius:999px;background:#20232a;color:#fff;padding:14px 20px;font-weight:900;box-shadow:0 8px 24px #0002;cursor:pointer;white-space:nowrap}.cartfloat.show{display:block}
+.overlay{display:none;position:fixed;z-index:20;inset:0;background:#0006;align-items:flex-end;justify-content:center}.overlay.show{display:flex}.drawer{width:min(620px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:18px 18px 0 0;padding:22px;box-shadow:0 -5px 30px #0002}.drawerhead{display:flex;align-items:center;justify-content:space-between;gap:10px}.drawerhead h2{margin:0}.x{border:1px solid var(--line);background:white;border-radius:8px;padding:7px 10px;cursor:pointer}.cartrow{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.cartrow small{display:block;color:var(--muted);margin-top:3px}.qty{display:flex;align-items:center;gap:8px}.qty button{background:#f4f5f7;border:1px solid var(--line);border-radius:6px;padding:4px 9px;cursor:pointer}.total{display:flex;justify-content:space-between;font-size:19px;font-weight:900;padding:18px 0}.send{width:100%;background:#168653;color:#fff;border:0;border-radius:9px;padding:14px;font-weight:900;cursor:pointer}.fine{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.photo{height:220px}}
+@media(max-width:680px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.container{padding:14px 10px 95px}.photo{height:175px}.cardbody{padding:10px}.name{font-size:14px}.add,.wa{font-size:11px;padding:9px 6px}.toolbar input,.toolbar select{width:100%;min-width:0}.logo{font-size:18px}}
+@media(max-width:380px){.grid{grid-template-columns:1fr 1fr}.photo{height:145px}}
+</style></head>
+<body>
+<div class="container">
+<header><div class="logo">MAC.R STORE PERÚ<small>FIGURAS DE ANIME Y COLECCIÓN</small></div><button class="btn btn-light" onclick="openCart()">🛒 Pedido (<span id="topCount">0</span>)</button></header>
+<section class="hero"><h1>Encuentra tus figuras favoritas</h1><p>Figuras de colección · Stock disponible · Preventas · Envíos a todo el Perú</p></section>
+<div class="toolbar">
+<input id="search" type="search" placeholder="Buscar por figura, anime o línea…" oninput="render()">
+<select id="anime" onchange="render()"><option value="Todos">Todos los animes</option><option>Dragon Ball</option><option>One Piece</option><option>Naruto</option><option>Bleach</option><option>Demon Slayer</option><option>Digimon</option><option>Solo Leveling</option><option>Overlord</option><option>Otros</option></select>
+<select id="line" onchange="render()"><option value="Todas">Todas las líneas</option><option>Grandista</option><option>Ichibansho</option><option>Banpresto</option><option>Ichiban Kuji</option><option>Model Kit</option><option>Otras</option></select>
+<div class="pills"><button class="pill active" onclick="setState('Todos',this)">Todo</button><button class="pill" onclick="setState('Stock',this)">● Stock disponible</button><button class="pill" onclick="setState('Preventa',this)">● Preventas</button></div>
+</div>
+<div class="headrow"><h2 id="heading">Catálogo</h2><span class="count" id="count">4 PRODUCTOS</span></div>
+<div class="grid" id="grid"></div><div class="empty" id="empty">No encontramos productos con esos filtros.</div>
+<p class="help">La disponibilidad, fecha de llegada de preventas, envío y forma de pago se confirman por WhatsApp. Este catálogo es una plantilla editable: reemplaza los productos de ejemplo por tu inventario real antes de publicarlo.</p>
+</div>
+<button class="cartfloat" id="cartFloat" onclick="openCart()">🛒 <span id="cartCount">0</span> · Ver pedido · <span id="cartTotal">S/ 0</span></button>
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeCart()"><section class="drawer"><div class="drawerhead"><h2>Tu pedido</h2><button class="x" onclick="closeCart()">Cerrar ✕</button></div><div id="items"></div><div class="total"><span>Total referencial</span><span id="total">S/ 0</span></div><button class="send" onclick="sendOrder()">Enviar pedido por WhatsApp</button><p class="fine">No se realiza ningún cobro en esta página. Confirmaremos contigo disponibilidad, envío y pago.</p></section></div>
+<script>
+// ================== CONFIGURACIÓN RÁPIDA ==================
+// Cambia el número si fuera necesario. Formato internacional sin + ni espacios.
+const WHATSAPP = "51902871470";
+// Edita los productos en esta lista. Para una foto, pon una URL pública en image.
+// Deja image: "" mientras todavía no tengas las fotos listas.
+const products = [
+ {id:1,name:"Trafalgar Law",anime:"One Piece",line:"Battle Record Collection",brand:"Banpresto",price:0,state:"Stock",image:"",note:"Entrega inmediata"},
+ {id:2,name:"Borsalino (Kizaru)",anime:"One Piece",line:"The ShukkoLogia Special Edition",brand:"Banpresto",price:0,state:"Stock",image:"",note:"Entrega inmediata"},
+ {id:3,name:"Portgas D. Ace",anime:"One Piece",line:"The ShukkoLogia Special Edition",brand:"Banpresto",price:0,state:"Stock",image:"",note:"Entrega inmediata"},
+ {id:4,name:"Sakazuki (Akainu)",anime:"One Piece",line:"The ShukkoLogia Special Edition",brand:"Banpresto",price:0,state:"Stock",image:"",note:"Entrega inmediata"}
+];
+let stateFilter="Todos",cart={};
+const money=n=>n>0?"S/ "+n.toFixed(2).replace(/\.00$/,""):"Consultar";
+function setState(s,b){stateFilter=s;document.querySelectorAll(".pill").forEach(x=>x.classList.toggle("active",x===b));render();}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim(),a=document.getElementById("anime").value,l=document.getElementById("line").value;
+ const list=products.filter(p=>(stateFilter==="Todos"||p.state===stateFilter)&&(a==="Todos"||p.anime===a)&&(l==="Todas"||p.line.toLowerCase().includes(l.toLowerCase())||(l==="Banpresto"&&p.brand==="Banpresto"))&&(p.name+" "+p.anime+" "+p.line+" "+p.brand).toLowerCase().includes(q));
+ document.getElementById("grid").innerHTML=list.map(p=>`<article class="card"><div class="photo"><span class="tag ${p.state==="Preventa"?"pre":""}">${p.state==="Preventa"?"PREVENTA":"STOCK DISPONIBLE"}</span>${p.image?`<img src="${p.image}" alt="${p.name}">`:`<div class="placeholder"><b>FOTO DEL PRODUCTO</b>${p.name}<br><span>Reemplaza este espacio por tu foto</span></div>`}</div><div class="cardbody"><div class="line">${p.line}</div><div class="name">${p.name}</div><div class="meta">${p.anime} · ${p.brand}</div><div class="price">${money(p.price)} <small>${p.price>0?"":"· precio pendiente"}</small></div><div class="meta">${p.note||""}</div><div class="actions"><button class="add" onclick="add(${p.id})">🛒 Agregar</button><button class="wa" title="Consultar por WhatsApp" onclick="ask(${p.id})">WhatsApp</button></div></div></article>`).join("");
+ document.getElementById("count").textContent=list.length+" PRODUCTO"+(list.length===1?"":"S");document.getElementById("empty").style.display=list.length?"none":"block";
+}
+function add(id){cart[id]=(cart[id]||0)+1;update();}
+function qty(id,n){cart[id]=(cart[id]||0)+n;if(cart[id]<=0)delete cart[id];update();}
+function update(){const count=Object.values(cart).reduce((a,b)=>a+b,0),total=products.reduce((s,p)=>s+(p.price>0?p.price:0)*(cart[p.id]||0),0);document.getElementById("topCount").textContent=count;document.getElementById("cartCount").textContent=count;document.getElementById("cartTotal").textContent=money(total);document.getElementById("total").textContent=money(total);document.getElementById("cartFloat").classList.toggle("show",count>0);document.getElementById("items").innerHTML=count?products.filter(p=>cart[p.id]).map(p=>`<div class="cartrow"><div><b>${p.name}</b><small>${p.state} · ${money(p.price)} por unidad</small></div><div class="qty"><button onclick="qty(${p.id},-1)">−</button><b>${cart[p.id]}</b><button onclick="qty(${p.id},1)">+</button></div></div>`).join(""):"<p>Tu pedido está vacío.</p>";}
+function openCart(){document.getElementById("overlay").classList.add("show")}function closeCart(){document.getElementById("overlay").classList.remove("show")}
+function textOrder(){const rows=products.filter(p=>cart[p.id]).map(p=>`• ${p.name} — ${p.state} x${cart[p.id]} — ${p.price>0?money(p.price*cart[p.id]):"consultar precio"}`);const total=products.reduce((s,p)=>s+(p.price>0?p.price:0)*(cart[p.id]||0),0);return `Hola MAC.R STORE PERÚ. Quisiera consultar este pedido:\n\n${rows.join("\n")}\n\nTotal referencial de productos con precio confirmado: ${money(total)}\nPor favor, confirmar disponibilidad, precio pendiente (si corresponde), envío y forma de pago.`}
+function sendOrder(){if(!Object.keys(cart).length){alert("Agrega al menos un producto.");return}window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(textOrder()),"_blank")}
+function ask(id){const p=products.find(x=>x.id===id);window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(`Hola MAC.R STORE PERÚ, quisiera consultar por ${p.name} (${p.anime}), línea ${p.line}. ¿Está disponible y cuál es su precio?`),"_blank")}
+render();update();
+</script></body></html>
